@@ -1,9 +1,16 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 
 function Profile() 
 {
-    return <a1> {"here is the profile component "} </a1>
+    return <>
+        { "Hello, World"}
+        <h1> {" This is my profile"}</h1>
+        <ul>
+            <li><a>Abdullah</a></li>
+            <li><a>Amr</a></li>
+            <li><a>Sobh</a></li>
+        </ul>
+    </>
 }
 
 export default Profile
