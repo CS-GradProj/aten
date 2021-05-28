@@ -1,13 +1,47 @@
+/* signup*/
 import React from "react";
 import * as md from "@material-ui/core";
+import * as i from "@material-ui/icons";
 
-import * as micons from "@material-ui/icons";
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
-function SignUp() {
-  const [user, setUser] = React.useState("Student");
-  const handleChange = (value) => {
-    setUser(value.target.value);
-  };
+import CheckboxList from "./admin";
+import CustomizedSelects from "./teacher";
+import Student from "./student";
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: "10px",
+    minWidth: 120
+  },
+  selectEmpty: {
+    marginTop: "10px"
+  }
+}));
+
+function Draw(props) {
+  const adminselect = CheckboxList();
+  const teacherselect = CustomizedSelects();
+  const studentselsect = Student();
+
+  if (props.props === "admin") {
+    return <h1>{adminselect}</h1>;
+  } else if (props.props === "teacher") {
+    return <>{teacherselect}</>;
+  } else {
+    return <h1> {studentselsect} </h1>;
+  }
+}
+
+
+export default function SignUp() {
+  const [user, setUser] = React.useState({ type: "teacher" });
+  //const classes = useStyles();
+
+  function handleChange(value) {
+    setUser({ type: value.target.value });
+  }
+
 
   return (
     <>
@@ -38,18 +72,20 @@ function SignUp() {
           type="password"
         />
 
-        <md.TextField
-          id="standard-select-currency"
-          select
-          label="Select"
-          value={user}
+        <md.InputLabel htmlFor="age-native-simple">User Type</md.InputLabel>
+        <md.Select
+          native
+          value={user.type}
           onChange={handleChange}
-          helperText="Please select the type of the user"
+          inputProps={{
+            name: "age"
+          }}
         >
-          <md.MenuItem value="IT"> {"IT"} </md.MenuItem>
-          <md.MenuItem value="Teacher"> {"Teacher"} </md.MenuItem>
-          <md.MenuItem value="Student"> {"Student"} </md.MenuItem>
-        </md.TextField>
+          <option aria-label="None" value="" />
+          <option value={"teacher"}>Teacher</option>
+          <option value={"student"}>Student</option>
+          <option value={"admin"}>admin</option>
+        </md.Select>
 
         <md.TextField
           style={{ display: "block" }}
@@ -59,82 +95,6 @@ function SignUp() {
           value="ID: 318180196"
           disabled
         />
-
-        <p>{"Please select a front view photo of the user "}</p>
-        <center>
-          
-          <md.Fab color="secondary" style={{ margin: "auto" }}>
-            <micons.AddPhotoAlternate />
-          </md.Fab>
-
-          <md.List style={{border: "black thin solid", borderRadius: 4}}>
-            <md.ListItem>
-              <md.ListItemAvatar>
-                <md.Avatar>
-                  <micons.AddPhotoAlternate />
-                </md.Avatar>
-              </md.ListItemAvatar>
-
-              <md.ListItemText
-                primary="Multimedia"
-                secondary="Feb 9, 2021 - Jun 9, 2021"
-              />
-            </md.ListItem>
-
-
-
-            <md.ListItem>
-              <md.ListItemAvatar>
-                <md.Avatar>
-                  <micons.AddPhotoAlternate />
-                </md.Avatar>
-              </md.ListItemAvatar>
-
-              <md.ListItemText
-                primary="Very large integrated circuits"
-                secondary="Feb 9, 2021 - Jun 9, 2021"
-              />
-            </md.ListItem>
-
-            <md.ListItem>
-              <md.ListItemAvatar>
-                <md.Avatar>
-                  <micons.AddPhotoAlternate />
-                </md.Avatar>
-              </md.ListItemAvatar>
-
-              <md.ListItemText
-                primary="Compilers"
-                secondary="Feb 9, 2021 - Jun 9, 2021"
-              />
-            </md.ListItem>
-
-
-            <md.ListItem>
-              <md.ListItemAvatar>
-                <md.Avatar>
-                  <micons.AddPhotoAlternate />
-                </md.Avatar>
-              </md.ListItemAvatar>
-
-              <md.ListItemText
-                primary="Expert systems"
-                secondary="Feb 9, 2021 - Jun 9, 2021"
-              />
-            </md.ListItem>
-
-
-            <md.ListItem>
-              <md.ListItemAvatar>
-                <md.Avatar>
-                  <micons.AddOutlined />
-                </md.Avatar>
-              </md.ListItemAvatar>
-            </md.ListItem>
-
-          </md.List>
-        </center>
-
         <md.Button
           style={{ display: "block" }}
           variant="contained"
@@ -144,8 +104,9 @@ function SignUp() {
           {"submit"}{" "}
         </md.Button>
       </form>
+      <Draw props={user.type} />
     </>
+
   );
 }
 
-export default SignUp;
