@@ -6,6 +6,8 @@ import Profile from "./profile/profile";
 import SignIn from "./signin/signin";
 import SignUp from "./signup/signup";
 import Attendance from "./attendance/attendance"
+import StudentFeedback from "./attendance/studentfeedback"
+import MaterialUIFormSubmit from "./MaterialUIFormSubmit"
 
 import { Container } from "@material-ui/core";
 import { CssBaseline } from "@material-ui/core";
@@ -27,6 +29,8 @@ export class App extends React.Component {
         <a href="/signup"> sign-up </a> <br />
         <a href="/profile"> view profile </a> <br />
         <a href="/attendance"> view attendance </a> <br />
+        <a href="/attendance2"> view attendance </a> <br />
+        <a href="/submit"> submit </a> <br />
         <Container >
           <div style={appViewStyle}  >
             <Switch>
@@ -34,7 +38,8 @@ export class App extends React.Component {
               <Route path="/signup" component={SignUp} />
               <Route path="/profile" component={Profile} />
               <Route path="/Attendance" component={Attendance} />
-              <Route component={SignIn} />
+              <Route path="/attendance2" component={StudentFeedback} />
+              <Route path="/submit" component={MaterialUIFormSubmit} />
             </Switch>
           </div>
         </Container>
