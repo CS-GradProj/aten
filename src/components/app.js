@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 // import components
 import SignIn from "./Pages/signin";
-import CreateUser  from "./Pages/CreateUser";
 import Student from "./Pages/Student";
 import Professor from "./Pages/Professor";
 import Admin from "./Pages/Admin";
@@ -15,8 +14,6 @@ export class App extends React.Component {
     return (
       <>
         <CssBaseline />
-        <a href="/"> sign-in </a> <br />
-        <a href="/adduser"> Add new User </a> <br />
         <a href="/student"> Student </a> <br />
         <a href="/professor"> Professor </a> <br />
         <a href="/admin"> Admin </a> <br />
@@ -24,7 +21,6 @@ export class App extends React.Component {
         <BrowserRouter>
           <Switch fontFamily="Monospace" >
             <Route path="/" exact component={SignIn} />
-            <Route path="/adduser" component={CreateUser} />
             <Route path="/student" component={Student} />
             <Route path="/professor" component={Professor} />
             <Route path="/admin" component={Admin} />

@@ -77,9 +77,61 @@ export default function AttendanceTable(props)
               }
             </StyledTableRow>
           ))}
+
+          
         </MC.TableBody>
       </MC.Table>
     </MC.TableContainer>
   );
 
 }
+
+
+const rows2 = [
+  createData("Abdullah", "Amr ", [true, true, false, true, true, true, false, true, true, true, false, true]),
+  createData("Soha", "Amgad ", [false, true, false, true, false, true, false, true, false, true, false, true]),
+  createData("Yehia ", "Khaled ", [true, false, true, true, true, false, true, true, true, false, true, true]),
+  createData("Mirette", "Ehab", [true, false, true, true, true, false, true, true, true, false, true, true]),
+  createData("Sara", "Magdy", [true, false, true, true, true, false, true, true, true, false, true, true]),
+  createData("Omnia", "Sobhy", [true, false, true, true, true, false, true, true, true, false, true, true]),
+];
+
+export function AttendanceTableProf(props)
+{
+  const classes = useStyles();
+
+  return (
+    <MC.TableContainer component={Paper}>
+      <MC.Table className={classes.table} aria-label="customized table">
+        <MC.TableHead>
+          <MC.TableRow>
+            <StyledTableCell align="left" width={200} > First Name</StyledTableCell>
+            <StyledTableCell align="left" width={200} > Last Name </StyledTableCell>
+
+            {
+                rows2[0].attendance.map( (value, key) => { return <StyledTableCell> { "W/" +  (key + 1) } </StyledTableCell> })
+              }
+
+          </MC.TableRow>
+        </MC.TableHead>
+        <MC.TableBody>
+          {rows2.map((row) => (
+            <StyledTableRow key={row.name}>
+              <StyledTableCell component="th" scope="row">
+                {row.name}
+              </StyledTableCell>
+              <StyledTableCell align="left">{row.Teacher}</StyledTableCell>
+              {
+                row.attendance.map( value => { return <StyledTableCell> { value? <MI.Check style={{margin: "10px"}} /> : <MI.Clear style={{margin: "10px"}} /> } </StyledTableCell> })
+              }
+            </StyledTableRow>
+          ))}
+
+          
+        </MC.TableBody>
+      </MC.Table>
+    </MC.TableContainer>
+  );
+
+}
+

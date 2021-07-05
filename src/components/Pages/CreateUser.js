@@ -44,7 +44,7 @@ function StudentSection() {
         separator={<MI.NavigateNext fontSize="small" />}
         aria-label="breadcrumb"
 
-        style={{margin: "0 auto", width: "fitContent"}}
+        style={{ margin: "0 auto", width: "fitContent" }}
       >
         <MC.Link color="inherit">HICIT</MC.Link>
 
@@ -97,6 +97,15 @@ function ProfessorSection() {
     },
   ];
   const [subjects, setSubjects] = React.useState(defaultSubjects);
+  const handleAddClick = () => {
+    setSubjects([...subjects, {
+      subject_name: " ",
+      subject_date: " ",
+      subject_location: " "
+    }]);
+
+  };
+  let i;//i=index
   return (
     <MC.Box>
       {subjects.map((subject, key) => {
@@ -112,12 +121,23 @@ function ProfessorSection() {
                 primary={subject.name}
                 secondary={subject.TimeAndLocation}
               />
+              <MC.Box>
+               <MC.Button variant="contained" color="secondary" onClick={handleAddClick}>
+                  add
+          </MC.Button>
+          
+              </MC.Box>
             </MC.ListItem>
             <MC.Divider variant="inset" component="li" />
+
           </MC.List>
+
         );
-      })}
-    </MC.Box>
+      })
+      }
+
+
+    </MC.Box >
   );
 }
 
@@ -147,99 +167,108 @@ export default function CreateUser() {
   };
 
   return (
+    <MC.Box
+      width={700}
+      style={{
+        margin: "67px auto",
+        backgroundColor: "#fEfeff",
+        padding: "29px",
+      }}
+    >
       <MC.Box
-        width={700}
-        style={{
-          margin: "67px auto",
-          backgroundColor: "#fEfeff",
-          padding: "29px",
-        }}
+        textAlign="center"
+        fontWeight="fontWeightBold"
+        margin="10px 0"
+        fontSize={40}
       >
-        <MC.Box
-          textAlign="center"
-          fontWeight="fontWeightBold"
-          margin="10px 0"
-          fontSize={40}
-        >
-          {"Create new User"}
-        </MC.Box>
-
-        <MC.Box style={{ margin: "10px auto", width: "fit-content" }}>
-          <MC.TextField
-            color="primary"
-            id="standard-basic"
-            label="First Name"
-          />
-          <MC.TextField
-            color="primary"
-            id="standard-basic"
-            label="Middle Name"
-          />
-          <MC.TextField color="primary" id="standard-basic" label="Last Name" />
-        </MC.Box>
-
-        <MC.Box width="590px" style={{ margin: "20px auto" }}>
-          <MC.TextField
-            color="secondary"
-            label="Password"
-            type="password"
-            fullWidth
-          />
-        </MC.Box>
-
-        <MC.Box style={{ margin: "27px" }}>
-          <MC.TextField
-            label="User ID"
-            id="outlined-size-small"
-            defaultValue="000000000"
-            variant="outlined"
-          />
-
-          <MC.FormControl
-            variant="outlined"
-            style={{ minWidth: 120, marginLeft: 10 }}
-          >
-            <MC.InputLabel id="demo-simple-select-outlined-label">
-              User Type
-            </MC.InputLabel>
-            <MC.Select
-              labelId="demo-simple-select-outlined-label"
-              id="demo-simple-select-outlined"
-              value={userType}
-              onChange={handleUserTypeSelect}
-              label="User Type"
-            >
-              <MC.MenuItem value="">
-                <em>None</em>
-              </MC.MenuItem>
-              <MC.MenuItem value={1}>Administrator</MC.MenuItem>
-              <MC.MenuItem value={2}>Professor</MC.MenuItem>
-              <MC.MenuItem value={3}>Student</MC.MenuItem>
-            </MC.Select>
-          </MC.FormControl>
-
-          <MC.Button
-            variant="contained"
-            color="secondary"
-            startIcon={<MI.ImageOutlined />}
-            style={{ margin: "10px 4px" }}
-          >
-            Add Photo
-          </MC.Button>
-        </MC.Box>
-
-        <MC.Box style={{ margin: "10px auto", width: "350px" }}>
-          <RenderUserForm userType={userType} />
-        </MC.Box>
-
-        <MC.Divider style={{ margin: "20px auto" }} variant="inset" />
-
-        <MC.Box>
-          <MC.Button variant="contained" color="secondary">
-            Submit User
-          </MC.Button>
-        </MC.Box>
-        
+        {"Create new User"}
       </MC.Box>
+
+      <MC.Box style={{ margin: "10px auto", width: "fit-content" }}>
+        <MC.TextField
+          color="primary"
+          id="standard-basic"
+          label="First Name"
+        />
+        <MC.TextField
+          color="primary"
+          id="standard-basic"
+          label="Middle Name"
+        />
+        <MC.TextField color="primary" id="standard-basic" label="Last Name" />
+      </MC.Box>
+
+      <MC.Box width="590px" style={{ margin: "20px auto" }}>
+        <MC.TextField
+          color="secondary"
+          label="Email"
+          type="email"
+          fullWidth
+        />
+      </MC.Box>
+
+      <MC.Box width="590px" style={{ margin: "20px auto" }}>
+        <MC.TextField
+          color="secondary"
+          label="Password"
+          type="password"
+          fullWidth
+        />
+      </MC.Box>
+
+      <MC.Box style={{ margin: "27px" }}>
+        <MC.TextField
+          label="User ID"
+          id="outlined-size-small"
+          defaultValue="000000000"
+          variant="outlined"
+        />
+
+        <MC.FormControl
+          variant="outlined"
+          style={{ minWidth: 120, marginLeft: 10 }}
+        >
+          <MC.InputLabel id="demo-simple-select-outlined-label">
+            User Type
+            </MC.InputLabel>
+          <MC.Select
+            labelId="demo-simple-select-outlined-label"
+            id="demo-simple-select-outlined"
+            value={userType}
+            onChange={handleUserTypeSelect}
+            label="User Type"
+          >
+            <MC.MenuItem value="">
+              <em>None</em>
+            </MC.MenuItem>
+            <MC.MenuItem value={1}>Administrator</MC.MenuItem>
+            <MC.MenuItem value={2}>Professor</MC.MenuItem>
+            <MC.MenuItem value={3}>Student</MC.MenuItem>
+          </MC.Select>
+        </MC.FormControl>
+
+        <MC.Button
+          variant="contained"
+          color="secondary"
+          startIcon={<MI.ImageOutlined />}
+          style={{ margin: "10px 4px" }}
+        >
+          Add Photo
+          </MC.Button>
+      </MC.Box>
+
+      <MC.Box style={{ margin: "10px auto", width: "350px" }}>
+        <RenderUserForm userType={userType} />
+      </MC.Box>
+
+      <MC.Divider style={{ margin: "20px auto" }} variant="inset" />
+
+      <MC.Box>
+        <MC.Button variant="contained" color="secondary">
+          Submit User
+          </MC.Button>
+      </MC.Box>
+
+    </MC.Box>
   );
 }
